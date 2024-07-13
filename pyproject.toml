@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "py-todo-template"
+version = "0.1.0"
+description = ""
+authors = ["Paolo Rechia <paolorechia@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+pyleiter = "^0.1.0"
+ruff = "^0.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[pyleiter]
+format = { command = "ruff format", help = "Applies ruff format to project"}
+lint = { command = "ruff check k8s-cluster", help = "Runs project formatter and linter" }
