@@ -10,14 +10,23 @@ python = "^3.10"
 
 
 [tool.poetry.group.dev.dependencies]
-pyleiter = "^0.1.0"
 ruff = "^0.5.1"
+pyleiter = "^0.2.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 
-[pyleiter]
-format = { command = "ruff format", help = "Applies ruff format to project"}
+[tool.pyleiter.commands]
+# Coding Setup
+format = { command = "ruff format k8s-cluster", help = "Applies ruff format to project"}
 lint = { command = "ruff check k8s-cluster", help = "Runs project formatter and linter" }
+
+# Local Kind Setup
+install_kind = { command = "[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind"}
+create_kind = { command = "kind create cluster --config k8s-cluster/kind_config.yaml", help="Create kind cluster"}
+install_ingress = { command = "./k8s-cluster/install_ingress.sh", help="Install Ingress on kind cluster"}
+setup_local_registry = { command = "./k8s-cluster/local_registry/run_all.sh", help = "Setup Local Registry"}
+
+# Local Kubernetes Application

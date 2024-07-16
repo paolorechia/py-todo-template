@@ -2,13 +2,13 @@
 
 [[package]]
 name = "pyleiter"
-version = "0.1.0"
+version = "0.2.1"
 description = "Simple task manager"
 optional = false
 python-versions = "<4.0,>=3.10"
 files = [
-    {file = "pyleiter-0.1.0-py3-none-any.whl", hash = "sha256:274d5a916591ea30b44005302e43dc50b83c91d622df771a0df3219983a0a028"},
-    {file = "pyleiter-0.1.0.tar.gz", hash = "sha256:ff55e31054da4297eea90249656d1d7c58d3c7d09c968569a3fbef3dc6ea4514"},
+    {file = "pyleiter-0.2.1-py3-none-any.whl", hash = "sha256:d887acaf89607c5238d3e2b5ad838de46be87e667f77f121baea4ef2ae858ffe"},
+    {file = "pyleiter-0.2.1.tar.gz", hash = "sha256:aef7f4a26482f105dd169869be1c5d2b50fadbc5a303d9260b0f8cacc9db37d9"},
 ]
 
 [package.dependencies]
@@ -55,4 +55,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "51a0e5470c0f3f191fe46d169c5741efda4ecc7669c627fa676924c0bd9600bc"
+content-hash = "755fed94a309d87a7df9faac3cde76dbd412e506c785ee7008fbb367df34ed8d"
