@@ -23,10 +23,13 @@ lint = { command = "ruff check k8s-cluster", help = "Runs project formatter and 
 
 # Local Kind Setup
 install_kind = {command = "[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind"}
-create_kind = { command = "kind create cluster --config k8s-cluster/kind_config.yaml", help="Create kind cluster"}
+create_kind = { command = "kind create cluster --config k8s-cluster/kind-config.yaml", help="Create kind cluster"}
 kill_kind = { command = "kind delete clusters kind", help = "Tears down local cluster"}
 install_ingress = { command = "./k8s-cluster/install_ingress.sh", help="Install Ingress on kind cluster"}
-setup_local_registry = { command = "./k8s-cluster/local_registry/run_all.sh", help = "Setup Local Registry"}
+setup_local_registry = { command = "./k8s-cluster/local_registry.sh", help = "Setup Local Registry"}
 
 # Local Kubernetes Application
-install_postgres = {command = " ./k8s-postgres/create_secret.sh && kubectl apply -f k8s-postgres/pv.yaml && kubectl apply -f k8s-postgres/pvc.yaml && kubectl apply -f k8s-postgres/postgres.yaml ", help = "Install postgres"}
+gen_postgres_secret = { command = "./k8s-postgres/create_secret.sh" }
+postgres_pv = { command = "kubectl apply -f k8s-postgres/pv.yaml" }
+postgres_pvc = { command = "kubectl apply -f k8s-postgres/pvc.yaml" }
+postgres_create = { command = "kubectl apply -f k8s-postgres/postgres.yaml", help = "Install postgres" }
