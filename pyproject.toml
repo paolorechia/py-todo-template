@@ -22,14 +22,14 @@ format = { command = "ruff format k8s-cluster", help = "Applies ruff format to p
 lint = { command = "ruff check k8s-cluster", help = "Runs project formatter and linter" }
 
 # Local Kind Setup
-install_kind = {command = "[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind"}
-create_kind = { command = "kind create cluster --config k8s-cluster/kind-config.yaml", help="Create kind cluster"}
-kill_kind = { command = "kind delete clusters kind", help = "Tears down local cluster"}
-install_ingress = { command = "./k8s-cluster/install_ingress.sh", help="Install Ingress on kind cluster"}
-setup_local_registry = { command = "./k8s-cluster/local_registry.sh", help = "Setup Local Registry"}
+kind_install = {command = "[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind"}
+kind_create = { command = "kind create cluster --config k8s-cluster/kind-config.yaml", help="Create kind cluster"}
+kind_kill = { command = "kind delete clusters kind", help = "Tears down local cluster"}
+kind_install_ingress = { command = "./k8s-cluster/install_ingress.sh", help="Install Ingress on kind cluster"}
+kind_setup_local_registry = { command = "./k8s-cluster/local_registry.sh", help = "Setup Local Registry"}
 
 # Local Kubernetes Application
-gen_postgres_secret = { command = "./k8s-postgres/create_secret.sh" }
+postgres_secret = { command = "./k8s-postgres/create_secret.sh" }
 postgres_pv = { command = "kubectl apply -f k8s-postgres/pv.yaml" }
 postgres_pvc = { command = "kubectl apply -f k8s-postgres/pvc.yaml" }
 postgres_create = { command = "kubectl apply -f k8s-postgres/postgres.yaml", help = "Install postgres" }
