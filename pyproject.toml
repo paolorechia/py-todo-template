@@ -7,6 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+litestar = "^2.9.1"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.5.1"
@@ -16,6 +17,7 @@ pytest = "^8.2.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
 
 [tool.pyleiter.commands]
 # Coding Setup
@@ -34,3 +36,7 @@ postgres_secret = { command = "./k8s-postgres/create_secret.sh" }
 postgres_pv = { command = "kubectl apply -f k8s-postgres/pv.yaml" }
 postgres_pvc = { command = "kubectl apply -f k8s-postgres/pvc.yaml" }
 postgres_create = { command = "kubectl apply -f k8s-postgres/postgres.yaml", help = "Install postgres" }
+
+
+# App
+app_test = { command = "pytest -vvv"}
