@@ -1,9 +1,9 @@
-from app.src.environment import Environment
-from app.src.secrets import read_secrets
+from src.environment import Environment
+from src.secrets import read_secrets
 from sqlalchemy import create_engine, URL, Engine
 
 
-def create_sqlalchemey_engine(environment: Environment) -> Engine:
+def create_sqlalchemy_engine(environment: Environment) -> Engine:
     if environment.database_driver == "postgresql":
         secrets = read_secrets(environment)
         url_object = URL.create(

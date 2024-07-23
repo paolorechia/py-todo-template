@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from app.src.environment import Environment
+from src.environment import Environment
 
 
 @dataclass
