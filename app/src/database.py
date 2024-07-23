@@ -6,7 +6,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 
 class Base(DeclarativeBase):
-    pass
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 class Item(Base):
@@ -33,9 +34,8 @@ def create_sqlalchemy_engine(environment: Environment) -> Engine:
 
     else:
         engine = create_engine(
-            "sqlite+pysqlite:///:memory:",
+            "sqlite:////tmp/test_app.db",
             echo=True,
-            connect_args={"check_same_thread": False},
         )
 
     return engine

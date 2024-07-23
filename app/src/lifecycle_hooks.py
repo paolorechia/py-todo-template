@@ -1,4 +1,5 @@
 """Methods run on application start and shutdown."""
+
 import logging
 
 
@@ -10,6 +11,7 @@ from src.environment import Environment
 
 
 logger = logging.getLogger(__name__)
+
 
 def read_environment(app: Litestar) -> Environment:
     app.state.environment = Environment()

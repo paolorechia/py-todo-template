@@ -24,7 +24,13 @@ def hello_world(request: Request) -> dict[str, str]:
         session.add(item)
         session.commit()
 
-    return {"hello": "world"}
+    with Session(engine) as session:
+        items = session.query(Item).all()
+
+    response = []
+    for item in items:
+        response.append(item.as_dict())
+    return response
 
 
 litestar_app = Litestar(
