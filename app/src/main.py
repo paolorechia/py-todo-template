@@ -10,4 +10,3 @@ def hello_world() -> dict[str, str]:
 
 
 app = Litestar(route_handlers=[hello_world])
-

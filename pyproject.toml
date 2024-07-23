@@ -8,6 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 litestar = "^2.9.1"
+sqlalchemy = "^2.0.31"
+psycopg2-binary = "^2.9.9"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.5.1"
@@ -21,8 +23,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pyleiter.commands]
 # Coding Setup
-format = { command = "ruff format k8s-cluster", help = "Applies ruff format to project"}
-lint = { command = "ruff check k8s-cluster", help = "Runs project formatter and linter" }
+format = { command = "ruff format app", help = "Applies ruff format to project"}
+lint = { command = "ruff check app", help = "Runs project formatter and linter" }
 
 # Local Kind Setup
 kind_install = {command = "[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.23.0/kind-linux-amd64 && chmod +x ./kind && sudo mv ./kind /usr/local/bin/kind"}
