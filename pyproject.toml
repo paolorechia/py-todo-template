@@ -38,3 +38,5 @@ postgres_create = { command = "kubectl apply -f k8s-postgres/postgres.yaml", hel
 app_test = { command = "pytest -vvv"}
 app_build = { command = "./build.sh"}
 app_deploy = { command = "kubectl apply -f ./k8s-app/app.yaml"}
+app_undeploy = { command = "kubectl delete -f ./k8s-app/app.yaml" }
+app_logs = { command = "kubectl get pods | grep todo-app | awk '{print $1} | xargs kubectl logs -f "}

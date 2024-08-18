@@ -1,8 +1,12 @@
+import logging
+
 from src.environment import Environment
 from src.secrets import read_secrets
 from sqlalchemy import create_engine, URL, Engine, String
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped, mapped_column
+
+logger = logging.getLogger(__name__)
 
 
 class Base(DeclarativeBase):
@@ -22,12 +26,13 @@ class Item(Base):
 
 def create_sqlalchemy_engine(environment: Environment) -> Engine:
     if environment.database_driver == "postgresql":
+        logger.info("Setting up postgres database connection")
         secrets = read_secrets(environment)
         url_object = URL.create(
             "postgresql",
             username=secrets.username,
             password=secrets.password,
-            host=environment.host,
+            host=environment.database_host,
             database=environment.database_name,
         )
         engine = create_engine(url_object)

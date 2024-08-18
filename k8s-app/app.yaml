@@ -29,6 +29,23 @@ spec:
       containers:
       - image: localhost:5001/todo-app
         name: todo-app
+        env:
+          - name: DATABASE_DRIVER
+            value: postgresql
+          - name: DATABASE_HOST
+            value: postgres
+          - name: DATABASE_NAME
+            value: postgres
+          - name: SECRETS_CONFIG_FILEPATH
+            value: /run/secrets/postgres
         ports:
         - containerPort: 8000
           name: todo-app
+        volumeMounts:
+        - name: secret-volume
+          mountPath: /run/secrets/postgres
+          readOnly: true
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: dbcredentials
