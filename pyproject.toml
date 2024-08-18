@@ -36,3 +36,5 @@ postgres_create = { command = "kubectl apply -f k8s-postgres/postgres.yaml", hel
 
 # App
 app_test = { command = "pytest -vvv"}
+app_build = { command = "./build.sh"}
+app_deploy = { command = "kubectl apply -f ./k8s-app/app.yaml"}
