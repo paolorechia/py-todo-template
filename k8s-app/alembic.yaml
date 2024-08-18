@@ -4,6 +4,7 @@ kind: Job
 metadata:
   name: todo-app-alembic-job
 spec:
+  ttlSecondsAfterFinished: 120
   template:
     spec:
       containers:
