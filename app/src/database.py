@@ -19,6 +19,7 @@ class Item(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(30))
     status: Mapped[str] = mapped_column(String(30))
+    new_column: Mapped[str] = mapped_column(String(30))
 
     def __repr__(self) -> str:
         return f"Item(id={self.id!r}, name={self.name!r}, status={self.status!r})"

@@ -37,6 +37,12 @@ postgres_create = { command = "kubectl apply -f k8s-postgres/postgres.yaml", hel
 # App
 app_test = { command = "pytest -vvv"}
 app_build = { command = "./build.sh"}
+app_build_alembic = { command = "./build_alembic.sh"}
+
 app_deploy = { command = "kubectl apply -f ./k8s-app/app.yaml"}
 app_undeploy = { command = "kubectl delete -f ./k8s-app/app.yaml" }
+
+app_run_alembic_migrations = { command = "kubectl apply -f ./k8s-app/alembic.yaml"} 
+app_clean_alembic = { command = "kubectl delete -f ./k8s-app/alembic.yaml" }
+
 app_logs = { command = "kubectl get pods | grep todo-app | awk '{print $1} | xargs kubectl logs -f "}

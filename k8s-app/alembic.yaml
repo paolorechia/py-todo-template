@@ -1,0 +1,31 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: todo-app-alembic-job
+spec:
+  template:
+    spec:
+      containers:
+      - image: localhost:5001/todo-app-alembic
+        name: todo-app
+        env:
+          - name: DATABASE_DRIVER
+            value: postgresql
+          - name: DATABASE_HOST
+            value: postgres
+          - name: DATABASE_NAME
+            value: postgres
+          - name: SECRETS_CONFIG_FILEPATH
+            value: /run/secrets/postgres
+        command: ["/venv/bin/alembic", "upgrade", "head"]
+        volumeMounts:
+        - name: secret-volume
+          mountPath: /run/secrets/postgres
+          readOnly: true
+      restartPolicy: Never
+      volumes:
+      - name: secret-volume
+        secret:
+          secretName: dbcredentials
+  backoffLimit: 0

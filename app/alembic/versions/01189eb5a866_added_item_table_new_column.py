@@ -1,8 +1,8 @@
-"""First revision
+"""Added item table new column
 
-Revision ID: a8162b9f2c9e
+Revision ID: 01189eb5a866
 Revises: 
-Create Date: 2024-08-18 14:20:46.201249
+Create Date: 2024-08-18 14:28:23.538726
 
 """
 from typing import Sequence, Union
@@ -12,15 +12,22 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'a8162b9f2c9e'
+revision: str = '01189eb5a866'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    pass
-
+    op.add_column(
+        "item",
+        sa.Column(
+            "new_column", sa.String(length=30), nullable=True
+        )
+    )
 
 def downgrade() -> None:
-    pass
+    op.drop_column(
+        "item",
+        "new_column"
+    )
