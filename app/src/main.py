@@ -23,18 +23,19 @@ from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExp
 from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
 
+# Manual instrumentation on top of automatic
 # Service name is required for most backends
 resource = Resource(attributes={
     SERVICE_NAME: "todo-app"
 })
 
 traceProvider = TracerProvider(resource=resource)
-processor = BatchSpanProcessor(OTLPSpanExporter(endpoint="your-endpoint-here"))
+processor = BatchSpanProcessor(OTLPSpanExporter(endpoint="jaeger-service:4317"))
 traceProvider.add_span_processor(processor)
 trace.set_tracer_provider(traceProvider)
 
 reader = PeriodicExportingMetricReader(
-    OTLPMetricExporter(endpoint="localhost:5555")
+    OTLPMetricExporter(endpoint="jaeger-service:4317")
 )
 
 meterProvider = MeterProvider(resource=resource, metric_readers=[reader])

@@ -58,6 +58,12 @@ spec:
             value: postgres
           - name: SECRETS_CONFIG_FILEPATH
             value: /run/secrets/postgres
+          - name: OTEL_SERVICE_NAME
+            value: todo-app
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: http://jaeger-service:4317
+          - name: OTEL_METRICS_EXPORTER
+            value: null
         ports:
         - containerPort: 8000
           name: todo-app
