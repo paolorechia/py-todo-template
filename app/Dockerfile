@@ -19,4 +19,4 @@ FROM gcr.io/distroless/python3-debian12
 COPY --from=build-venv /venv /venv
 COPY . /app
 WORKDIR /app
-ENTRYPOINT ["/venv/bin/uvicorn", "--host", "0.0.0.0", "--port", "8000", "src.main:litestar_app"]
+ENTRYPOINT ["/venv/bin/opentelemetry-instrument", "/venv/bin/uvicorn", "--host", "0.0.0.0", "--port", "8000", "src.main:litestar_app"]

@@ -46,3 +46,12 @@ app_run_alembic_migrations = { command = "kubectl apply -f ./k8s-app/alembic.yam
 app_clean_alembic = { command = "kubectl delete -f ./k8s-app/alembic.yaml" }
 
 app_logs = { command = "kubectl get pods | grep todo-app | awk '{print $1} | xargs kubectl logs -f "}
+
+
+# Certs-manager
+certs_manager_install = { command = "./k8s-cert-manager/install.sh"}
+
+# Jaeger
+jaeger_deploy = { command = "kubectl apply -f ./k8s-jaeger/jaeger.yaml"}
+jaeger_expose = { command = "./k8s-jaeger/expose_ui.sh"}
+jaeger_undeploy  = { command = "kubectl apply -f ./k8s-jaeger/jaeger.yaml"}

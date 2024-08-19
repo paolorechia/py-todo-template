@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 16686
+      targetPort: 16686
+      name: ui
+    - protocol: TCP
+      port: 4317
+      targetPort: 4317
+      name: endpoint
+    - protocol: TCP
+      port: 4318
+      targetPort: 4318
+      name: unknown
+    - protocol: TCP
+      port: 9411
+      targetPort: 9411
+      name: zip-port
+  selector:
+    app: jaeger
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger-deployment
+spec:
+  selector:
+    matchLabels:
+      app: jaeger
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jaeger
+    spec:
+      containers:
+      - image: jaegertracing/all-in-one:1.60
+        name: jaeger
+        env:
+          - name: COLLECTOR_ZIPKIN_HOST_PORT
+            value: "9411"
+        ports:
+          - containerPort: 16686
+          - containerPort: 4317
+          - containerPort: 4318
+          - containerPort: 9411
