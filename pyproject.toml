@@ -55,3 +55,9 @@ certs_manager_install = { command = "./k8s-cert-manager/install.sh"}
 jaeger_deploy = { command = "kubectl apply -f ./k8s-jaeger/jaeger.yaml"}
 jaeger_expose = { command = "./k8s-jaeger/expose_ui.sh"}
 jaeger_undeploy  = { command = "kubectl apply -f ./k8s-jaeger/jaeger.yaml"}
+
+# Loki
+loki_deploy = { command = "helm install --values k8s-loki/values.yaml loki grafana/loki"}
+
+# Alloy
+alloy_deploy = { command = "./k8s-alloy/install.sh"}

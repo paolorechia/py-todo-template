@@ -37,7 +37,7 @@ trace.set_tracer_provider(traceProvider)
 reader = PeriodicExportingMetricReader(
     OTLPMetricExporter(endpoint="jaeger-service:4317")
 )
-
+tracer = trace.get_tracer("todo_app.main")
 meterProvider = MeterProvider(resource=resource, metric_readers=[reader])
 metrics.set_meter_provider(meterProvider)
 
@@ -46,20 +46,21 @@ metrics.set_meter_provider(meterProvider)
 @get("/", sync_to_thread=True)
 def hello_world(request: Request) -> dict[str, str]:
     """Keeping the tradition alive with hello world."""
-    engine = request.app.state.engine
-    assert engine, "Database engine is not configured!!"
-    with Session(engine) as session:
-        item = Item(name="test-item", status="todo")
-        session.add(item)
-        session.commit()
+    with tracer.start_as_current_span("hello_world"):
+        engine = request.app.state.engine
+        assert engine, "Database engine is not configured!!"
+        with Session(engine) as session:
+            item = Item(name="test-item", status="todo")
+            session.add(item)
+            session.commit()
 
-    with Session(engine) as session:
-        items = session.query(Item).all()
+        with Session(engine) as session:
+            items = session.query(Item).all()
 
-    response = []
-    for item in items:
-        response.append(item.as_dict())
-    return response
+        response = []
+        for item in items:
+            response.append(item.as_dict())
+        return response
 
 
 litestar_app = Litestar(
